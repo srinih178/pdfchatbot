@@ -1,7 +1,6 @@
 import PyPDF2
 from langchain.chains import ConversationalRetrievalChain
-from langchain.chat_models import ChatOpenLlama
-from langchain.embeddings import LlamaEmbeddings
+from langchain_ollama import ChatOllama, OllamaEmbeddings
 from langchain.vectorstores import FAISS
 
 class PDFChatbot:
@@ -20,12 +19,15 @@ class PDFChatbot:
         return text
 
     def _setup_qa_chain(self):
-        """Sets up a QA chain using LangChain with OpenLLaMA."""
-        embeddings = LlamaEmbeddings()
+        print("Document Text:", self.document_text[:500])  # Print a snippet of the extracted text
+
+        """Sets up a QA chain using LangChain with ChatOllama."""
+        embeddings = OllamaEmbeddings(model="llama3.2")  # Ensure correct configuration for embeddings
         doc_search = FAISS.from_texts([self.document_text], embeddings)
 
+        print("QA Chain Initialized Successfully")
         return ConversationalRetrievalChain.from_llm(
-            llm=ChatOpenLlama(model="openllama-7b"),
+            llm=ChatOllama(model="llama3.2"),  # Ensure the model name is valid
             retriever=doc_search.as_retriever()
         )
 
@@ -36,10 +38,11 @@ class PDFChatbot:
 
 if __name__ == "__main__":
     # Specify the path to your PDF
-    pdf_path = "example.pdf"
+    pdf_path = "restaurant_bill.pdf"
 
     # Create a chatbot instance
     chatbot = PDFChatbot(pdf_path)
+
 
     print("Chatbot is ready! Ask questions about the PDF.")
     chat_history = []
