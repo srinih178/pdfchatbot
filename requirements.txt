@@ -1,0 +1,8 @@
+PyPDF2
+langchain
+openai
+faiss-cpu
+langchain_community
+openllama
+transformers
+llama-stack
