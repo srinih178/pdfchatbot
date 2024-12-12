@@ -2,4 +2,9 @@ PyPDF2
 langchain_community
 langchain_ollama
 faiss-cpu
+flask
+pdfplumber
+ollama
+streamlit
+requests
 
