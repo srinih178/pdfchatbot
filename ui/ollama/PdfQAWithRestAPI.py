@@ -92,7 +92,8 @@ def ask_question():
         return jsonify({"error": "No question provided"}), 400
 
     question = data['question']
-    context = " ".join(text_chunks[:3])  # Use the first few chunks for context
+    #context = " ".join(text_chunks[:30])  # Use the first few chunks for context
+    context = " ".join(text_chunks)  # Use all chunks for context
     try:
         print("context", context)
         answer = call_ollama_api(context, question)

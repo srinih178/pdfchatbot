@@ -43,7 +43,7 @@ class PdfQAChatbot:
 
 if __name__ == "__main__":
     # Specify the path to your PDF
-    pdf_path = "restaurant_bill.pdf"
+    pdf_path = "../restaurant_bill.pdf"
 
     # Create a chatbot instance
     chatbot = PdfQAChatbot(pdf_path)
